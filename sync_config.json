@@ -1,0 +1,14 @@
+{
+  "sync": {
+    "marking_menus": true,
+    "shelves": true,
+    "workspaces": true,
+    "hotkeys": true,
+    "panel_layouts": true,
+    "settings": true,
+    "colors": true
+  },
+  "remove_deleted_files": true,
+  "show_message": true,
+  "capture_patterns": []
+}
