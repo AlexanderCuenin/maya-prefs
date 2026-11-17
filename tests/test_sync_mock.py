@@ -127,7 +127,7 @@ class Maya(FakeMaya):
 
 class Mel(object):
     def eval(self, s):
-        if "gShelfTopLevel" in s: return None  # no UI in tests
+        if "gShelfTopLevel" in s or "gMainWindow" in s: return None  # no UI in tests
         if "saveCurrentWorkspace" in s: return None
         raise AssertionError("unexpected mel: " + s)
 
@@ -137,7 +137,7 @@ class FakeGitHub(object):
     def __init__(self, root):
         self.root, self.n, self.online = root, 0, True
         os.makedirs(root)
-        self.head = self._new(None, {"README.md": b"# prefs\n",
+        self.head = self._new(None, {"README.md": b"# prefs\n", "sync_config.json": b"{}",
                                      "tools/maya_sync.py": open(ms.__file__.replace(".pyc", ".py"), "rb").read()})
     def _dir(self, sha): return os.path.join(self.root, sha)
     def _new(self, parent, files):
@@ -212,8 +212,8 @@ try:
     b = Maya(os.path.join(tmp, "B"), False)
     use(b)
     ms.startup()
-    assert len(b.deferred) == 1
-    b.deferred.pop()()
+    assert len(b.deferred) == 2  # settings pass + menu
+    for fn in b.deferred: fn()
     assert b.ov["timeSliderTickSize"] == 3 and b.ov["graphEditorCurveColor"] == [1, 2, 3]
     assert b.unit == "ntsc" and b.tangent == ["spline", "stepped"] and b.ws == "MyAnim"
     assert b.hkcur == "AlexKeys" and b.rtc["myBreakdown"]["command"] == "print 1"
@@ -278,7 +278,20 @@ try:
     ms.sync()
     assert a.ov["timeSliderTickSize"] == 6
 
-    # 9. No token -> push refuses politely
+    # 9. Retired files are moved out of Maya and never captured
+    gh.online = True
+    use(b)
+    open(os.path.join(b.prefs, "markingMenus", "menu_curveTangents_MM.mel"), "w").write("// old")
+    cfg = json.loads(gh.read("sync_config.json"))
+    cfg["retired"] = {"marking_menus": ["menu_curveTangents*.mel"]}
+    gh.edit({"sync_config.json": json.dumps(cfg).encode()})
+    assert any("retire menu_curveTangents_MM.mel" in c for c in ms.sync())
+    assert not os.path.exists(os.path.join(b.prefs, "markingMenus", "menu_curveTangents_MM.mel"))
+    assert os.path.exists(os.path.join(b.root, "prefs_sync", "retired", "marking_menus", "menu_curveTangents_MM.mel"))
+    open(os.path.join(b.prefs, "markingMenus", "menu_curveTangents_MM.mel"), "w").write("// old")
+    assert not any("curveTangents" in c for c in ms.push(dry_run=True))
+
+    # 10. No token -> push refuses politely
     gh.online = True
     ms._token = lambda: ""
     assert ms.push() == []

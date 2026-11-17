@@ -1,0 +1,61 @@
+{
+  "file": "menu_cuenin_baking_MM.mel",
+  "items": [
+    {
+      "label": "Bake Ones",
+      "position": "N",
+      "bold": true,
+      "script": "n_bake_ones.py"
+    },
+    {
+      "label": "Bake Twos",
+      "position": "NE",
+      "bold": true,
+      "script": "ne_bake_twos.py"
+    },
+    {
+      "label": "Bake on Threes",
+      "position": "E",
+      "bold": true,
+      "script": "e_bake_on_threes.py"
+    },
+    {
+      "label": "Bake Fours",
+      "position": "SE",
+      "bold": true,
+      "script": "se_bake_fours.py"
+    },
+    {
+      "label": "Bake Custom Interval",
+      "position": "S",
+      "bold": true,
+      "script": "s_bake_custom_interval.py"
+    },
+    {
+      "label": "Bake Infinity",
+      "position": "SW",
+      "bold": true,
+      "script": "sw_bake_infinity.py"
+    },
+    {
+      "label": "Copy Key Times",
+      "position": "W",
+      "bold": true,
+      "script": "w_copy_key_times.py"
+    },
+    {
+      "label": "Paste Key Times",
+      "position": "NW",
+      "bold": true,
+      "script": "nw_paste_key_times.py"
+    },
+    {
+      "label": "separator",
+      "divider": true
+    },
+    {
+      "label": "Delete Unsnapped",
+      "script": "list_delete_unsnapped.py"
+    }
+  ]
+}

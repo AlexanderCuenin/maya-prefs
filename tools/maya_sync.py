@@ -45,7 +45,7 @@ try:  # Python 3
 except ImportError:  # Python 2 (Maya 2018-2020)
     from urllib2 import Request, urlopen, HTTPError, URLError
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # --------------------------------------------------------------------------
 # Where your prefs live on GitHub. Claude sets these; edit if you rename the
@@ -554,6 +554,15 @@ def _sync_files(root, cfg, state, apply, log, live_ui):
                 managed[key] = h
                 if cat == "shelves" and live_ui:
                     _reload_shelf(dst)
+        retired = cfg.get("retired", {}).get(cat, [])
+        for name in _list_files(dst_dir, retired) if retired else []:
+            log.change("%s: retire %s (moved to prefs_sync/retired)" % (cat, name))
+            if apply:
+                keep = os.path.join(sync_dir(), "retired", cat)
+                if not os.path.isdir(keep):
+                    os.makedirs(keep)
+                shutil.move(os.path.join(dst_dir, name), os.path.join(keep, name))
+                managed.pop(cat + "/" + name, None)
         if cfg.get("remove_deleted_files", True):
             for key in [k for k in managed if k.startswith(cat + "/")]:
                 name = key.split("/", 1)[1]
@@ -833,6 +842,32 @@ def startup():
             _message(log)
 
     cmds.evalDeferred(_later, lowestPriority=True)
+    cmds.evalDeferred(add_menu, lowestPriority=True)
+
+
+MENU = "mayaSyncMenu"
+
+
+def add_menu():
+    """A 'Prefs Sync' menu in Maya's main menu bar (rebuilt every start, so it
+    never depends on a shelf)."""
+    try:
+        if cmds.about(batch=True):
+            return
+        main = mel.eval("$_ms_tmp = $gMainWindow")
+        if not main:
+            return
+        if cmds.menu(MENU, exists=True):
+            cmds.deleteUI(MENU)
+        cmds.menu(MENU, parent=main, label="Prefs Sync", tearOff=True)
+        cmds.menuItem(label="Pull from GitHub", command=lambda *_: sync())
+        cmds.menuItem(label="Check (change nothing)", command=lambda *_: check())
+        cmds.menuItem(label="Push my changes...", command=lambda *_: show())
+        cmds.menuItem(divider=True)
+        cmds.menuItem(label="Open the repo on GitHub",
+                      command=lambda *_: cmds.launch(web="https://github.com/" + REPO))
+    except Exception as exc:
+        print("[maya_sync] could not add the menu: %s" % exc)
 
 
 # --------------------------------------------------------------------------
@@ -868,10 +903,13 @@ def capture(folder=None, extra_patterns=None, include_default_menus=False, quiet
         pass
 
     defaults = set() if include_default_menus else _default_marking_menus()
+    retired = load_config().get("retired", {})
     for cat, repo_sub, local_dir_fn, patterns in FILE_CATEGORIES:
         src = local_dir_fn()
         for name in _list_files(src, patterns):
             if cat == "marking_menus" and name.lower() in defaults:
+                continue
+            if _match_any(name, retired.get(cat, [])):
                 continue
             dst = os.path.join(folder, repo_sub)
             if not os.path.isdir(dst):

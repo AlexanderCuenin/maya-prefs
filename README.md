@@ -2,13 +2,17 @@
 
 Alex's Maya preferences. **This repo is the source of truth:** every time Maya starts it checks GitHub and makes Maya match what's here.
 
-## Install (once per computer)
+## Set up a Maya (new computer or new Maya version)
 
-1. Download this repo (**Code > Download ZIP**) and unzip it anywhere.
-2. Drag `tools/install.py` into a Maya viewport.
-3. When asked, paste your GitHub token (see below) or skip it if you only want to pull.
+1. Open [`install.py`](install.py) on GitHub and click **Download raw file**.
+2. Drag it into a Maya viewport.
+3. Paste your GitHub token when asked (see below), or skip it if you only want to pull.
 
-That's it. The installer puts `maya_sync.py` in `~/maya/scripts` (shared by every Maya version), hooks it into `userSetup.py`, adds a **Prefs Sync** shelf button and does a first sync. Your old prefs are zipped to `~/maya/prefs_sync/backups/` before the first sync on each Maya version.
+That one file does the rest: it downloads the sync tool from this repo into your shared Maya scripts folder (`~/Library/Preferences/Autodesk/maya/scripts` on a Mac, `Documents/maya/scripts` on Windows), hooks it into `userSetup.py`, adds a **Prefs Sync** menu and shelf button, and pulls all your prefs. Your old prefs are zipped to `prefs_sync/backups/` before the first sync on each Maya version.
+
+## First time only: fill the repo from your Maya
+
+The repo starts out with just the tool and your two new marking menus. To put the rest of your setup in it, install as above with your token, then click **Push my Maya changes to GitHub**. That sends your hotkeys, shelves, workspaces, panel layouts, colors and animation settings.
 
 ## How it works
 
@@ -17,7 +21,7 @@ That's it. The installer puts `maya_sync.py` in `~/maya/scripts` (shared by ever
 - **Offline?** It uses the last downloaded copy and carries on.
 - A change you make in Maya that you don't push gets put back at the next sync. Push it if you want to keep it.
 
-## The Prefs Sync button
+## The Prefs Sync menu and button
 
 | Button | What it does |
 |---|---|
@@ -33,7 +37,7 @@ From the Script Editor: `import maya_sync` then `maya_sync.sync()`, `maya_sync.c
 
 Only you. On GitHub only the owner and collaborators you invite can push. Pushing from Maya uses **your** token, which lives only on your computer in `~/maya/prefs_sync/token.txt` and never goes in the repo.
 
-Make the token here: <https://github.com/settings/personal-access-tokens/new>
+Make the token here (only you can, since it's tied to your account): <https://github.com/settings/personal-access-tokens/new>
 
 - **Repository access:** Only select repositories > `maya-prefs`
 - **Permissions:** Repository permissions > **Contents: Read and write**
@@ -50,13 +54,19 @@ The repo is public right now, so anyone can *see* it but nobody else can change 
 | `panel_layouts.json` | Your **Panels > Saved Layouts** | Rarely |
 | `hotkeys/*.mhk` | One file per hotkey set (Maya's own export format) | Through Maya |
 | `hotkeys/runtime_commands.json` | Your custom runtime commands (what hotkeys call) | Yes |
-| `marking_menus/menu_*.mel` | Your custom marking menus (Maya's built-in ones are left out) | Yes |
+| `marking_menus/menu_*.mel` | Your custom marking menus, the files Maya reads (Maya's built-in ones are left out) | Built from `marking_menus_src` where a source exists |
+| `marking_menus_src/<menu>/` | Readable sources: `menu.json` (label, position, bold) and one `.py`/`.mel` file per item | Yes, then run `python tools/marking_menus.py build` |
 | `shelves/shelf_*.mel` | Shelves | Yes |
 | `workspaces/*.json` | Saved workspaces | Rarely |
-| `sync_config.json` | Turn categories on or off, keep deleted files, hide the startup message, extra optionVar patterns for capture | Yes |
-| `tools/` | The sync script and installer. Pushing a new `tools/maya_sync.py` updates everyone's copy on the next sync | Claude does |
+| `sync_config.json` | Turn categories on or off, keep deleted files, hide the startup message, extra optionVar patterns for capture, and `retired` files to take out of Maya | Yes |
+| `install.py` | The one-file installer | Claude does |
+| `tools/` | The sync script and the marking menu builder. Pushing a new `tools/maya_sync.py` updates every Maya's copy on the next sync | Claude does |
 
-Deleting a file here removes it from Maya on the next sync, but only files the sync put there itself.
+Deleting a file here removes it from Maya on the next sync, but only files the sync put there itself. To take out a file the sync never installed (an old marking menu, say), list it under `retired` in `sync_config.json`. It's moved to `prefs_sync/retired/`, not deleted, and Push skips it.
+
+## Marking menus as code
+
+`marking_menus_src/cuenin_splines_MM/` and `cuenin_baking_MM/` hold your two marking menus as plain scripts. Edit an item's `.py`, or `menu.json` to move or rename items, then run `python tools/marking_menus.py build` to regenerate `marking_menus/menu_*.mel`. If a `.mel` was changed in Maya and pushed from there, the build won't overwrite it. Run `python tools/marking_menus.py extract marking_menus/menu_<name>.mel` first to bring that change into the sources.
 
 ## Settings that need a restart
 

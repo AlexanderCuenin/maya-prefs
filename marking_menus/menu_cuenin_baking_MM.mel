@@ -1,0 +1,220 @@
+
+    menuItem
+        -label "Bake Ones" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake Ones\nBakes the curves of your selected keys so there is a key every 1 frame(s).\nRange: first to last selected key. If no keys are selected, the selected\nobjects' curves are baked over the playback range.\nOnly the curves you pick are baked, other channels are left alone.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\nSTEP = 1\n\n\ndef bake(step):\n    curves, (start, end) = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start, end = int(round(start)), int(round(end))\n    if end <= start:\n        cmds.warning(\"Select keys across a range of frames.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bake\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=step,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake(STEP)" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+    menuItem
+        -label "Bake Twos" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake Twos\nBakes the curves of your selected keys so there is a key every 2 frame(s).\nRange: first to last selected key. If no keys are selected, the selected\nobjects' curves are baked over the playback range.\nOnly the curves you pick are baked, other channels are left alone.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\nSTEP = 2\n\n\ndef bake(step):\n    curves, (start, end) = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start, end = int(round(start)), int(round(end))\n    if end <= start:\n        cmds.warning(\"Select keys across a range of frames.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bake\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=step,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake(STEP)" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+    menuItem
+        -label "Bake on Threes" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake on Threes\nBakes the curves of your selected keys so there is a key every 3 frame(s).\nRange: first to last selected key. If no keys are selected, the selected\nobjects' curves are baked over the playback range.\nOnly the curves you pick are baked, other channels are left alone.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\nSTEP = 3\n\n\ndef bake(step):\n    curves, (start, end) = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start, end = int(round(start)), int(round(end))\n    if end <= start:\n        cmds.warning(\"Select keys across a range of frames.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bake\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=step,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake(STEP)" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+    menuItem
+        -label "Bake Fours" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake Fours\nBakes the curves of your selected keys so there is a key every 4 frame(s).\nRange: first to last selected key. If no keys are selected, the selected\nobjects' curves are baked over the playback range.\nOnly the curves you pick are baked, other channels are left alone.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\nSTEP = 4\n\n\ndef bake(step):\n    curves, (start, end) = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start, end = int(round(start)), int(round(end))\n    if end <= start:\n        cmds.warning(\"Select keys across a range of frames.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bake\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=step,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake(STEP)" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+    menuItem
+        -label "Bake Custom Interval" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake Custom Interval\nAsks for a number, then bakes the curves of your selected keys so there is a\nkey every N frames. Same range rules as the other bake buttons.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\ndef bake_custom():\n    result = cmds.promptDialog(\n        title=\"Bake Custom Interval\",\n        message=\"Bake every N frames:\",\n        text=\"2\",\n        button=[\"Bake\", \"Cancel\"],\n        defaultButton=\"Bake\",\n        cancelButton=\"Cancel\",\n        dismissString=\"Cancel\",\n    )\n    if result != \"Bake\":\n        return\n    try:\n        step = int(float(cmds.promptDialog(q=True, text=True)))\n    except ValueError:\n        cmds.warning(\"Enter a whole number.\")\n        return\n    if step < 1:\n        cmds.warning(\"Interval must be 1 or more.\")\n        return\n\n    curves, (start, end) = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start, end = int(round(start)), int(round(end))\n    if end <= start:\n        cmds.warning(\"Select keys across a range of frames.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bakeCustom\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=step,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake_custom()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+    menuItem
+        -label "Bake Infinity" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBake Infinity\nTurns pre/post infinity (cycle, oscillate, linear...) into real keys.\nBakes the curves of your selected keys (or the selected objects' curves)\non every frame of the playback range, then sets infinity back to constant so\nthe baked keys are what you see.\n\"\"\"\nimport math\nimport maya.cmds as cmds\n\n\ndef _curves_and_range():\n    \"\"\"Curves + (start, end). Selected keys win, else selected objects over the playback range.\"\"\"\n    sel_keys = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_keys:\n        times = []\n        for c in sel_keys:\n            times += cmds.keyframe(c, q=True, selected=True, timeChange=True) or []\n        return sel_keys, (min(times), max(times))\n    sel = cmds.ls(selection=True)\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, (cmds.playbackOptions(q=True, min=True), cmds.playbackOptions(q=True, max=True))\n\n\ndef _plugs(curves):\n    plugs = []\n    for c in set(curves):\n        p = cmds.listConnections(c + \".output\", plugs=True, source=False, destination=True) or []\n        if p:\n            plugs.append(p[0])\n    return plugs\n\n\ndef bake_infinity():\n    curves, _ = _curves_and_range()\n    plugs = _plugs(curves)\n    if not plugs:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n    start = int(round(cmds.playbackOptions(q=True, min=True)))\n    end = int(round(cmds.playbackOptions(q=True, max=True)))\n\n    cmds.undoInfo(openChunk=True, chunkName=\"bakeInfinity\")\n    cmds.refresh(suspend=True)\n    try:\n        cmds.bakeResults(\n            plugs,\n            time=(start, end),\n            sampleBy=1,\n            simulation=False,\n            preserveOutsideKeys=True,\n            sparseAnimCurveBake=False,\n        )\n        for plug in plugs:\n            src = cmds.listConnections(plug, source=True, destination=False, type=\"animCurve\") or []\n            for crv in src:\n                cmds.setInfinity(crv, preInfinite=\"constant\", postInfinite=\"constant\")\n    finally:\n        cmds.refresh(suspend=False)\n        cmds.undoInfo(closeChunk=True)\n\n\nbake_infinity()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+    menuItem
+        -label "Copy Key Times" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nCopy Key Times\nGraph Editor: remembers the frame numbers of all selected keys (across every\nselected curve). Pair it with Paste Key Times.\nThe list is stored in an optionVar, so it survives between button presses\nand Maya restarts.\n\"\"\"\nimport maya.cmds as cmds\n\nVAR = \"animTools_copiedKeyTimes\"\n\n\ndef copy_key_times():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if not curves:\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n\n    times = set()\n    for crv in curves:\n        for t in cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []:\n            times.add(round(t, 4))\n\n    cmds.optionVar(clearArray=VAR)\n    for t in sorted(times):\n        cmds.optionVar(floatValueAppend=(VAR, t))\n\n    print(\"Copied %d key time(s).\" % len(times))\n\n\ncopy_key_times()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+    menuItem
+        -label "Paste Key Times" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nPaste Key Times\nGraph Editor: inserts keys on the frames saved by Copy Key Times. Curves that\nalready have a key on a frame are skipped. Inserted keys keep the curve shape,\nand they get added to your selection.\n\nTarget curves: curves with selected keys, otherwise every curve on the\nselected objects.\n\"\"\"\nimport maya.cmds as cmds\n\nVAR = \"animTools_copiedKeyTimes\"\n\n\ndef paste_key_times():\n    if not cmds.optionVar(exists=VAR):\n        cmds.warning(\"Nothing copied yet. Run Copy Key Times first.\")\n        return\n    times = cmds.optionVar(q=VAR)\n    if not isinstance(times, list):\n        times = [times]\n    if not times or times == [0]:\n        cmds.warning(\"Nothing copied yet. Run Copy Key Times first.\")\n        return\n\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if not curves:\n        sel = cmds.ls(selection=True)\n        curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    if not curves:\n        cmds.warning(\"Select keys or objects to paste onto.\")\n        return\n\n    added = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"pasteKeyTimes\")\n    try:\n        for crv in set(curves):\n            plugs = cmds.listConnections(crv + \".output\", plugs=True, source=False, destination=True) or []\n            if not plugs:\n                continue\n            existing = set(round(t, 4) for t in (cmds.keyframe(crv, q=True, timeChange=True) or []))\n            for t in times:\n                if round(t, 4) in existing:\n                    continue\n                cmds.setKeyframe(plugs[0], time=t, insert=True)\n                cmds.selectKey(crv, add=True, time=(t, t))\n                added += 1\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Inserted %d key(s).\" % added)\n\n\npaste_key_times()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+    menuItem
+        -label "separator" 
+        -divider 1
+        -dividerLabel "separator" 
+        -subMenu 0
+        -tearOff 0
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 0
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem9;
+
+    menuItem
+        -label "Delete Unsnapped" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nDelete Unsnapped\nDeletes keys that sit between whole frames (subframe keys).\nIf you have keys selected, only those keys are checked.\nIf not, every key on the selected objects is checked.\n\"\"\"\nimport maya.cmds as cmds\n\nTOL = 1e-3  # how far from a whole frame still counts as snapped\n\n\ndef delete_unsnapped():\n    sel_curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    use_selection = bool(sel_curves)\n    if use_selection:\n        curves = sel_curves\n    else:\n        sel = cmds.ls(selection=True)\n        curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    if not curves:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n\n    removed = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"deleteUnsnapped\")\n    try:\n        for crv in set(curves):\n            if use_selection:\n                pool = cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []\n            else:\n                pool = cmds.keyframe(crv, q=True, timeChange=True) or []\n            bad = [t for t in pool if abs(t - round(t)) > TOL]\n            for t in bad:\n                cmds.cutKey(crv, time=(t, t), clear=True)\n            removed += len(bad)\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Deleted %d unsnapped key(s).\" % removed)\n\n\ndelete_unsnapped()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem10;
+
+setParent -m ..;
+

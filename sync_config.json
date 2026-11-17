@@ -10,5 +10,8 @@
   },
   "remove_deleted_files": true,
   "show_message": true,
-  "capture_patterns": []
+  "capture_patterns": [],
+  "retired": {
+    "marking_menus": ["menu_curveTangents*.mel", "menu_bakeKeys*.mel"]
+  }
 }

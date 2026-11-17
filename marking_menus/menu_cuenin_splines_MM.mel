@@ -1,0 +1,345 @@
+
+    menuItem
+        -label "Flip Curve" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nFlip Average\nGraph Editor: flips selected keys (value * -1) around the average value of the\nselected keys, so the curve mirrors over its own center.\nWorks per curve. Tangents flip with the values.\n\nSet USE_MIDPOINT = True to pivot on (min + max) / 2 instead of the mean.\nThat's a truer \"center\" if your keys are bunched up on one side.\n\"\"\"\nimport maya.cmds as cmds\n\nUSE_MIDPOINT = False\n\n\ndef flip_average():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if not curves:\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"flipAverage\")\n    try:\n        for crv in curves:\n            sel_times = cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []\n            sel_values = cmds.keyframe(crv, q=True, selected=True, valueChange=True) or []\n            if not sel_times:\n                continue\n\n            if USE_MIDPOINT:\n                anchor = (min(sel_values) + max(sel_values)) / 2.0\n            else:\n                anchor = sum(sel_values) / float(len(sel_values))\n\n            for t in sel_times:\n                cmds.scaleKey(\n                    crv,\n                    time=(t, t),\n                    timeScale=1,\n                    timePivot=0,\n                    valueScale=-1,\n                    valuePivot=anchor,\n                )\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n\nflip_average()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+    menuItem
+        -label "Flip Left" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nFlip Left\nGraph Editor: flips selected keys (value * -1) around the nearest key to the\nLEFT of the selection. If there is no key outside the selection on the left,\nit pivots on the leftmost selected key instead.\nWorks per curve. Tangents flip with the values.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef flip_left():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if not curves:\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"flipLeft\")\n    try:\n        for crv in curves:\n            sel_times = cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []\n            if not sel_times:\n                continue\n\n            first = min(sel_times)\n            all_times = cmds.keyframe(crv, q=True, timeChange=True) or []\n\n            # nearest key left of the selection, else the leftmost selected key\n            left = [t for t in all_times if t < first - 1e-6]\n            anchor_time = max(left) if left else first\n            anchor = cmds.keyframe(\n                crv, q=True, time=(anchor_time, anchor_time), valueChange=True\n            )[0]\n\n            for t in sel_times:\n                cmds.scaleKey(\n                    crv,\n                    time=(t, t),\n                    timeScale=1,\n                    timePivot=0,\n                    valueScale=-1,\n                    valuePivot=anchor,\n                )\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n\nflip_left()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+    menuItem
+        -label "Flip Right" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nFlip Right\nGraph Editor: flips selected keys (value * -1) around the nearest key to the\nRIGHT of the selection. If there is no key outside the selection on the right,\nit pivots on the rightmost selected key instead.\nWorks per curve. Tangents flip with the values.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef flip_right():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if not curves:\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n\n    cmds.undoInfo(openChunk=True, chunkName=\"flipRight\")\n    try:\n        for crv in curves:\n            sel_times = cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []\n            if not sel_times:\n                continue\n\n            last = max(sel_times)\n            all_times = cmds.keyframe(crv, q=True, timeChange=True) or []\n\n            # nearest key right of the selection, else the rightmost selected key\n            right = [t for t in all_times if t > last + 1e-6]\n            anchor_time = min(right) if right else last\n            anchor = cmds.keyframe(\n                crv, q=True, time=(anchor_time, anchor_time), valueChange=True\n            )[0]\n\n            for t in sel_times:\n                cmds.scaleKey(\n                    crv,\n                    time=(t, t),\n                    timeScale=1,\n                    timePivot=0,\n                    valueScale=-1,\n                    valuePivot=anchor,\n                )\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n\nflip_right()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+    menuItem
+        -label "Spline" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nAuto Tangent\nGraph Editor: sets the in and out tangents of the selected keys to Auto.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef auto_tangent():\n    if not cmds.keyframe(q=True, selected=True, keyframeCount=True):\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n    cmds.keyTangent(edit=True, inTangentType=\"auto\", outTangentType=\"auto\")\n\n\nauto_tangent()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+    menuItem
+        -label "Step" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nStep Tangent\nGraph Editor: sets the OUT tangent of the selected keys to Step.\nIn tangents are left alone, since Maya only steps on the out side.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef step_tangent():\n    if not cmds.keyframe(q=True, selected=True, keyframeCount=True):\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n    cmds.keyTangent(edit=True, outTangentType=\"step\")\n\n\nstep_tangent()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+    menuItem
+        -label "Flat" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nFlat Tangent\nGraph Editor: sets the in and out tangents of the selected keys to Flat.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef flat_tangent():\n    if not cmds.keyframe(q=True, selected=True, keyframeCount=True):\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n    cmds.keyTangent(edit=True, inTangentType=\"flat\", outTangentType=\"flat\")\n\n\nflat_tangent()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+    menuItem
+        -label "Buffer Snap" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nBuffer Snap\nGraph Editor: snapshots the current shape of the selected curves into Maya's\nbuffer curve, so you can edit and compare against the original.\nAlso turns on \"Show Buffer Curves\" in the Graph Editor.\n\nWorks on selected keys if there are any, otherwise on selected objects.\n\nMODE = \"store\"  -> save a new buffer (default)\nMODE = \"swap\"   -> swap the curve with its buffer (flip back to the old version)\n\"\"\"\nimport maya.cmds as cmds\n\nMODE = \"store\"\n\n\ndef buffer_snap():\n    has_keys = cmds.keyframe(q=True, selected=True, keyframeCount=True)\n    if not has_keys and not cmds.ls(selection=True):\n        cmds.warning(\"Select some keys or objects first.\")\n        return\n\n    if MODE == \"swap\":\n        cmds.bufferCurve(animation=\"keysOrObjects\", swap=True)\n    else:\n        cmds.bufferCurve(animation=\"keysOrObjects\", overwrite=True)\n\n    # make the buffer visible (editor name can differ, so don't die on it)\n    try:\n        cmds.animCurveEditor(\"graphEditor1GraphEd\", edit=True, showBufferCurves=\"on\")\n    except RuntimeError:\n        pass\n\n\nbuffer_snap()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+    menuItem
+        -label "Linear" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nLinear Tangent\nGraph Editor: sets the in and out tangents of the selected keys to Linear.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef linear_tangent():\n    if not cmds.keyframe(q=True, selected=True, keyframeCount=True):\n        cmds.warning(\"Select some keys in the Graph Editor first.\")\n        return\n    cmds.keyTangent(edit=True, inTangentType=\"linear\", outTangentType=\"linear\")\n\n\nlinear_tangent()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+    menuItem
+        -label "Spline Global" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nSet Auto Global\nSets the default tangent type for NEW keys to Auto (in and out).\nDoes not touch existing keys.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef set_auto_global():\n    cmds.keyTangent(g=True, inTangentType=\"auto\", outTangentType=\"auto\")\n    cmds.inViewMessage(amg=\"Default tangents: <hl>Auto</hl>\", pos=\"midCenter\", fade=True)\n\n\nset_auto_global()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem9;
+
+    menuItem
+        -label "Step Global" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nSet Step Global\nSets the default tangent type for NEW keys to Step (out) with a Flat in tangent.\nMaya has no step on the in side, so Flat is used there. Change IN_TYPE if you\nwant something else. Does not touch existing keys.\n\"\"\"\nimport maya.cmds as cmds\n\nIN_TYPE = \"flat\"\n\n\ndef set_step_global():\n    cmds.keyTangent(g=True, inTangentType=IN_TYPE, outTangentType=\"step\")\n    cmds.inViewMessage(amg=\"Default tangents: <hl>Step</hl>\", pos=\"midCenter\", fade=True)\n\n\nset_step_global()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem10;
+
+    menuItem
+        -label "Flat Global" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nSet Flat Global\nSets the default tangent type for NEW keys to Flat (in and out).\nDoes not touch existing keys.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef set_flat_global():\n    cmds.keyTangent(g=True, inTangentType=\"flat\", outTangentType=\"flat\")\n    cmds.inViewMessage(amg=\"Default tangents: <hl>Flat</hl>\", pos=\"midCenter\", fade=True)\n\n\nset_flat_global()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem11;
+
+    menuItem
+        -label "separator" 
+        -divider 1
+        -dividerLabel "separator" 
+        -subMenu 0
+        -tearOff 0
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 0
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem12;
+
+    menuItem
+        -label "Euler" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nSmart Euler Filter\nRuns Maya's Euler filter on rotation curves only.\n\nCurves come from the selected keys if there are any, otherwise from the\nselected objects. For every node it finds, it grabs ALL THREE rotate curves\n(X, Y, Z), because the filter needs the full set to work. Non-rotation curves\nare skipped. Filters the whole curve, not just the selected keys.\n\"\"\"\nimport maya.cmds as cmds\n\nROT_ATTRS = (\"rotateX\", \"rotateY\", \"rotateZ\", \"rx\", \"ry\", \"rz\")\n\n\ndef _scope_curves():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if curves:\n        return curves\n    sel = cmds.ls(selection=True)\n    return (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n\n\ndef smart_euler_filter():\n    curves = _scope_curves()\n    if not curves:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n\n    nodes = set()\n    for crv in set(curves):\n        plugs = cmds.listConnections(crv + \".output\", plugs=True, source=False, destination=True) or []\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            if attr in ROT_ATTRS:\n                nodes.add(node)\n\n    if not nodes:\n        cmds.warning(\"No rotation curves found.\")\n        return\n\n    count = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"smartEulerFilter\")\n    try:\n        for node in nodes:\n            rot_curves = []\n            for axis in \"XYZ\":\n                src = cmds.listConnections(node + \".rotate\" + axis, source=True, destination=False) or []\n                rot_curves += [c for c in src if cmds.nodeType(c).startswith(\"animCurve\")]\n            if rot_curves:\n                cmds.filterCurve(*rot_curves, filter=\"euler\")\n                count += 1\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Euler filtered rotation on %d node(s).\" % count)\n\n\nsmart_euler_filter()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem13;
+
+    menuItem
+        -label "separator" 
+        -divider 1
+        -dividerLabel "separator" 
+        -subMenu 0
+        -tearOff 0
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 0
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem14;
+
+    menuItem
+        -label "Kill Static Curves" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nStatic Anim Curves\nDeletes animation curves that don't actually animate (every key has the same\nvalue). The attribute keeps its value, it just loses the curve.\n\nIf you have keys selected, only those curves are checked.\nIf not, every curve on the selected objects is checked.\nDriven key curves (set driven key) are skipped.\n\"\"\"\nimport maya.cmds as cmds\n\nTOL = 1e-5  # max value spread that still counts as static\n\n\ndef static_anim_curves():\n    sel_curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if sel_curves:\n        curves = sel_curves\n    else:\n        sel = cmds.ls(selection=True)\n        curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n\n    if not curves:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n\n    deleted = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"staticAnimCurves\")\n    try:\n        for crv in set(curves):\n            if not cmds.objExists(crv):\n                continue\n            # skip set driven keys\n            if cmds.listConnections(crv + \".input\", source=True, destination=False):\n                continue\n            vals = cmds.keyframe(crv, q=True, valueChange=True) or []\n            if vals and (max(vals) - min(vals)) < TOL:\n                cmds.delete(crv)\n                deleted += 1\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Deleted %d static curve(s).\" % deleted)\n\n\nstatic_anim_curves()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem15;
+
+    menuItem
+        -label "Kill Redundant Keys" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nRedundant Keys\nDeletes keys that do nothing: a key is redundant when its value matches both\nneighbors and the tangents around it are flat, so removing it can't change the\ncurve shape. First and last keys on a curve are never deleted.\n\nIf you have keys selected, only those keys are checked.\nIf not, every key on the selected objects is checked.\n\"\"\"\nimport maya.cmds as cmds\n\nVALUE_TOL = 1e-4   # how close values must be to count as equal\nANGLE_TOL = 1e-3   # how close to zero a tangent angle must be to count as flat\n\n\ndef redundant_keys():\n    sel_curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    use_selection = bool(sel_curves)\n    if use_selection:\n        curves = sel_curves\n    else:\n        sel = cmds.ls(selection=True)\n        curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n\n    if not curves:\n        cmds.warning(\"Select keys or objects with animation first.\")\n        return\n\n    removed = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"redundantKeys\")\n    try:\n        for crv in set(curves):\n            times = cmds.keyframe(crv, q=True, timeChange=True) or []\n            if len(times) < 3:\n                continue\n            vals = cmds.keyframe(crv, q=True, valueChange=True)\n            in_ang = cmds.keyTangent(crv, q=True, inAngle=True)\n            out_ang = cmds.keyTangent(crv, q=True, outAngle=True)\n\n            selected = set()\n            if use_selection:\n                selected = set(round(t, 4) for t in\n                               (cmds.keyframe(crv, q=True, selected=True, timeChange=True) or []))\n\n            to_delete = []\n            for i in range(1, len(times) - 1):\n                if use_selection and round(times[i], 4) not in selected:\n                    continue\n                if abs(vals[i] - vals[i - 1]) > VALUE_TOL or abs(vals[i] - vals[i + 1]) > VALUE_TOL:\n                    continue\n                flat = (\n                    abs(out_ang[i - 1]) <= ANGLE_TOL\n                    and abs(in_ang[i]) <= ANGLE_TOL\n                    and abs(out_ang[i]) <= ANGLE_TOL\n                    and abs(in_ang[i + 1]) <= ANGLE_TOL\n                )\n                if flat:\n                    to_delete.append(times[i])\n\n            for t in to_delete:\n                cmds.cutKey(crv, time=(t, t), clear=True)\n            removed += len(to_delete)\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Deleted %d redundant key(s).\" % removed)\n\n\nredundant_keys()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem16;
+
+setParent -m ..;
+

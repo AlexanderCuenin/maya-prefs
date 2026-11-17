@@ -1,0 +1,83 @@
+{
+  "file": "menu_cuenin_splines_MM.mel",
+  "items": [
+    {
+      "label": "Flip Curve",
+      "position": "S",
+      "bold": true,
+      "script": "s_flip_curve.py"
+    },
+    {
+      "label": "Flip Left",
+      "position": "SW",
+      "bold": true,
+      "script": "sw_flip_left.py"
+    },
+    {
+      "label": "Flip Right",
+      "position": "SE",
+      "bold": true,
+      "script": "se_flip_right.py"
+    },
+    {
+      "label": "Spline",
+      "position": "NW",
+      "bold": true,
+      "script": "nw_spline.py"
+    },
+    {
+      "label": "Step",
+      "position": "N",
+      "bold": true,
+      "script": "n_step.py"
+    },
+    {
+      "label": "Flat",
+      "position": "NE",
+      "bold": true,
+      "script": "ne_flat.py"
+    },
+    {
+      "label": "Buffer Snap",
+      "position": "E",
+      "script": "e_buffer_snap.py"
+    },
+    {
+      "label": "Linear",
+      "position": "W",
+      "script": "w_linear.py"
+    },
+    {
+      "label": "Spline Global",
+      "script": "list_spline_global.py"
+    },
+    {
+      "label": "Step Global",
+      "script": "list_step_global.py"
+    },
+    {
+      "label": "Flat Global",
+      "script": "list_flat_global.py"
+    },
+    {
+      "label": "separator",
+      "divider": true
+    },
+    {
+      "label": "Euler",
+      "script": "list_euler.py"
+    },
+    {
+      "label": "separator",
+      "divider": true
+    },
+    {
+      "label": "Kill Static Curves",
+      "script": "list_kill_static_curves.py"
+    },
+    {
+      "label": "Kill Redundant Keys",
+      "script": "list_kill_redundant_keys.py"
+    }
+  ]
+}
