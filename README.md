@@ -66,10 +66,20 @@ Deleting a file here removes it from Maya on the next sync, but only files the s
 
 ## Marking menus as code
 
-`marking_menus_src/cuenin_splines_MM/` and `cuenin_baking_MM/` hold your two marking menus as plain scripts. Edit an item's `.py`, or `menu.json` to move or rename items, then run `python tools/marking_menus.py build` to regenerate `marking_menus/menu_*.mel`. If a `.mel` was changed in Maya and pushed from there, the build won't overwrite it. Run `python tools/marking_menus.py extract marking_menus/menu_<name>.mel` first to bring that change into the sources.
+`marking_menus_src/` holds the menus Claude maintains as plain scripts: `cuenin_splines_MM`, `cuenin_baking_MM` and `cuenin_reset_MM` (the animBot-free reset menu). The animBot menus (`copyPaste`, `timeBookmarks`, `visibility`) are kept exactly as Maya wrote them, straight in `marking_menus/`. They need animBot installed to do anything. Edit an item's `.py`, or `menu.json` to move or rename items, then run `python tools/marking_menus.py build` to regenerate `marking_menus/menu_*.mel`. If a `.mel` was changed in Maya and pushed from there, the build won't overwrite it. Run `python tools/marking_menus.py extract marking_menus/menu_<name>.mel` first to bring that change into the sources.
 
-## Settings that need a restart
+## Live or restart?
 
-Shelves, marking menus and workspaces that change while Maya is open are written straight away. Shelves are reloaded live; marking menus and workspaces show up fully after a restart. Everything else applies live.
+At startup nothing ever needs a restart: files are put in place before Maya builds its UI, and settings are applied right after. When you click **Pull** while Maya is open:
+
+| Category | When you see it |
+|---|---|
+| Marking menus | Live. The hotkey re-reads the menu file every time you press it |
+| Hotkeys and runtime commands | Live |
+| Shelves | Live. Changed shelves are reloaded in place |
+| Animation settings, fps, playback, default tangents, auto key | Live |
+| Colors | Live |
+| Panel layouts (Saved Layouts) | Live |
+| Workspaces | New ones show in the Workspace menu after a restart. If the one you're in changed, pick it again or restart |
 
 Works with Maya 2018 to 2026 (Python 2 and 3). `tests/test_sync_mock.py` runs the whole flow against a fake Maya and a fake GitHub: `python tests/test_sync_mock.py`.

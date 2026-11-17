@@ -12,6 +12,10 @@
   "show_message": true,
   "capture_patterns": [],
   "retired": {
-    "marking_menus": ["menu_curveTangents*.mel", "menu_bakeKeys*.mel"]
+    "marking_menus": [
+      "menu_curveTangents*.mel",
+      "menu_bakeKeys*.mel",
+      "menu_animBot_resetXforms*.mel"
+    ]
   }
 }

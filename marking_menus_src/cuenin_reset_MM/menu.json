@@ -1,0 +1,51 @@
+{
+  "file": "menu_cuenin_reset_MM.mel",
+  "items": [
+    {
+      "label": "Reset Translate",
+      "position": "W",
+      "bold": true,
+      "script": "w_reset_translate.py"
+    },
+    {
+      "label": "Reset Rotate",
+      "position": "E",
+      "bold": true,
+      "script": "e_reset_rotate.py"
+    },
+    {
+      "label": "Reset Scale",
+      "position": "S",
+      "bold": true,
+      "script": "s_reset_scale.py"
+    },
+    {
+      "label": "Reset All Xforms",
+      "position": "N",
+      "bold": true,
+      "script": "n_reset_all_xforms.py"
+    },
+    {
+      "label": "Reset Selected Channels",
+      "position": "NE",
+      "bold": true,
+      "script": "ne_reset_selected_channels.py"
+    },
+    {
+      "label": "Clear Channel Box Selection",
+      "position": "NW",
+      "bold": true,
+      "script": "nw_clear_channel_box_selection.py"
+    },
+    {
+      "label": "Reset Pose",
+      "bold": true,
+      "script": "list_reset_pose.py"
+    },
+    {
+      "label": "Reset Pivot",
+      "bold": true,
+      "script": "list_reset_pivot.py"
+    }
+  ]
+}

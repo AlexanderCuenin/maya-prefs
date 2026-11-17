@@ -16,6 +16,7 @@ menu.json item fields:
     position   N, NE, E, SE, S, SW, W, NW, or leave it out for the list below
     script     file next to menu.json; .py runs as Python, .mel as MEL
     bold       true / false (default false)
+    icon       image shown next to the item (optional; a missing file is ignored)
     divider    true for a separator line in the list
     flags      any other menuItem flag Maya should get, e.g. {"echoCommand": 1}
 
@@ -38,12 +39,12 @@ OUT = os.path.join(ROOT, "marking_menus")
 _ORDER = ["label", "divider", "dividerLabel", "subMenu", "tearOff", "command",
           "optionBox", "header", "enable", "visible", "data", "radialPosition",
           "allowOptionBoxes", "postMenuCommandOnce", "enableCommandRepeat",
-          "echoCommand", "italicized", "boldFont", "sourceType", "longDivider"]
+          "image", "echoCommand", "italicized", "boldFont", "sourceType", "longDivider"]
 _DEFAULTS = {"divider": 0, "subMenu": 0, "tearOff": 0, "optionBox": 0, "header": 0,
              "enable": 1, "visible": 1, "data": 0, "allowOptionBoxes": 1,
              "postMenuCommandOnce": 0, "enableCommandRepeat": 1, "echoCommand": 0,
              "italicized": 0, "boldFont": 0, "longDivider": 1}
-_STRING_FLAGS = {"label", "dividerLabel", "command", "radialPosition", "sourceType"}
+_STRING_FLAGS = {"label", "dividerLabel", "command", "radialPosition", "sourceType", "image"}
 
 
 def _mel_quote(text):
@@ -84,6 +85,8 @@ def _item_flags(item, folder):
             flags["sourceType"] = "mel"
     if item.get("position"):
         flags["radialPosition"] = item["position"]
+    if item.get("icon"):
+        flags["image"] = item["icon"]
     flags["boldFont"] = 1 if item.get("bold") else 0
     flags.update(item.get("flags", {}))
     return flags
@@ -96,6 +99,8 @@ def _emit(flags, index):
             continue
         if name in flags:
             value = flags[name]
+            if value is None:  # flag left out on purpose
+                continue
         elif name in _DEFAULTS:
             value = _DEFAULTS[name]
         else:
@@ -106,6 +111,8 @@ def _emit(flags, index):
             lines.append("        -%s %s" % (name, int(value)))
     for name in sorted(set(flags) - set(_ORDER)):  # anything extra
         value = flags[name]
+        if value is None:
+            continue
         lines.append("        -%s %s" % (name, _mel_quote(value) if isinstance(value, type(u"")) or isinstance(value, str) else int(value)))
     lines.append("        menuEditorMenuItem%d;" % index)
     return "\n".join(lines) + "\n"
@@ -214,6 +221,8 @@ def extract(mel_path, out_root=SRC):
             entry["divider"] = True
         if f.get("boldFont"):
             entry["bold"] = True
+        if f.get("image"):
+            entry["icon"] = f["image"]
         if not f.get("divider") and f.get("command", "") != "":
             ext = ".py" if f.get("sourceType") == "python" else ".mel"
             base = (entry.get("position", "list").lower() + "_" + _slug(entry["label"]))
@@ -228,7 +237,7 @@ def extract(mel_path, out_root=SRC):
         rebuilt = _item_flags(dict(entry, script=None), folder)
         extra = {}
         for k, v in f.items():
-            if k in ("label", "dividerLabel", "command", "radialPosition", "boldFont"):
+            if k in ("label", "dividerLabel", "command", "radialPosition", "boldFont", "image"):
                 continue
             if k == "sourceType" and entry.get("script"):
                 continue
@@ -236,6 +245,11 @@ def extract(mel_path, out_root=SRC):
                 continue
             if v != rebuilt.get(k, _DEFAULTS.get(k)):
                 extra[k] = v
+        for k in _ORDER:  # flags Maya didn't write for this item
+            if k in f or k in ("command", "echoCommand") and f.get("divider"):
+                continue
+            if k in rebuilt or k in _DEFAULTS:
+                extra[k] = None
         if extra:
             entry["flags"] = extra
         spec["items"].append(entry)

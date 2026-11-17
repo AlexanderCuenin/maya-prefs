@@ -1,0 +1,344 @@
+
+    menuItem
+        -label "X-Ray" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "dR_viewXrayTGL;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "XRay.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+    menuItem
+        -label "Manipulators" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayManipulators()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Ma_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+    menuItem
+        -label "Wireframe" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "toggleWireframeOnShadedOption;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "WireFrameOnShaded.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem10;
+
+    menuItem
+        -label "Cycle Display Mode" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "customCycleDisplayMode;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem12;
+
+    menuItem
+        -label "HUD" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayHUD()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_HUD_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+    menuItem
+        -label "NURBS Curves" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayNURBSCurves()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_NC_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem13;
+
+    menuItem
+        -label "Motion Trails" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayMotionTrails()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_MT_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+    menuItem
+        -label "Anim View" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "toggle_HUD_visibility;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem14;
+
+    menuItem
+        -label "Lights" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayLights()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Li_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+    menuItem
+        -label "Cycle Display Quality" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "CycleQualityDisplay;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem11;
+
+    menuItem
+        -label "Locators" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayLocators()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Lo_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+    menuItem
+        -label "Selection Highlighting" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplaySelectionHighlighting()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_SH_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+    menuItem
+        -label "Joints" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayJoints()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Jo_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem15;
+
+    menuItem
+        -label "Polygons" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayPolygons()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Po_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem16;
+
+    menuItem
+        -label "Grid" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayGrid()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_Gr_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem9;
+
+    menuItem
+        -label "Image Planes" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.viewportExtraTools_toggleDisplayImagePlanes()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/toggle_IP_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+setParent -m ..;
+

@@ -1,0 +1,1082 @@
+
+    menuItem
+        -label "Keys" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+        menuItem
+            -label "Paste Keys" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animCurveExtraTools_pasteKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "E" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/paste_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Copy Keys" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animCurveExtraTools_copyKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "W" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/copy_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Paste Keys Relative" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animCurveExtraTools_pasteKeysRelative()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/blue/paste_keys_relative_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Copy Keys (Maya)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "performCopyKeyArgList 1 {\"0\", \"animationList\", \"0\"}" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "BP_copyFrame.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+        menuItem
+            -label "menuEditorMenuItem7" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "performCopyKeyArgList 1 {\"1\", \"animationList\", \"0\"}" 
+            -optionBox 1
+            -enable 1
+            -visible 0
+            -data 0
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 0
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem7;
+
+        menuItem
+            -label "Paste Keys (Maya)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "performPasteKeyArgList 1 {\"0\", \"animationList\", \"0\"}" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "BP_pasteFrame.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem5;
+
+        menuItem
+            -label "menuEditorMenuItem6" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "performPasteKeyArgList 1 {\"1\", \"animationList\", \"0\"}" 
+            -optionBox 1
+            -enable 1
+            -visible 0
+            -data 0
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 0
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem6;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Pose" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+        menuItem
+            -label "Paste Pose" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pastePose()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_pose_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Copy Pose" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_copyPose()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/copy_pose_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Paste Mirror Pose" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pasteMirrorPose()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_mirror_pose_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Paste Pose To..." 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pastePoseTo()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "S" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_pose_to_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Animation" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+        menuItem
+            -label "Copy Animation" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_copyAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/copy_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Paste To..." 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pasteAnimationTo()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "S" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_animation_to_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Paste Mirror" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pasteMirrorAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_mirror_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Paste Replace" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pasteReplaceAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_replace_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+        menuItem
+            -label "Paste Insert" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_pasteInsertAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "E" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/paste_insert_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem5;
+
+        menuItem
+            -label "Import Animation" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_importAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/import_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem7;
+
+        menuItem
+            -label "Export Animation" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.animPoseTransfer_exportAnimation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/purple/export_animation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem6;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Xform World" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SW" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+        menuItem
+            -label "Copy Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_copyXformWorldSpace()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/copy_xform_world_space_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Copy Playback Range" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_copyXformWorldSpacePlaybackRange()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "W" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/copy_xform_world_space_playback_range_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label " Paste Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformWorldSpace()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_world_space_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Paste All Keys" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformWorldSpaceAllKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "E" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_world_space_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+        menuItem
+            -label "Paste Next Frame" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformWorldSpaceNextFrame()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_world_space_next_frame_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem5;
+
+        menuItem
+            -label "Paste-Bake Frames" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformWorldSpaceBakeFrames()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "S" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_world_space_bake_frames_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem6;
+
+        menuItem
+            -label "Auto Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_autoXformWorldSpace()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "N" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/auto_xform_world_space_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem7;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Xform Relationship" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SE" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+        menuItem
+            -label "Copy Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_copyXformRelationship()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/copy_xform_relationship_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label " Paste Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformRelationship()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_relationship_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Auto Xform" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_autoXformRelationship()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "N" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/auto_xform_relationship_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Paste-Bake Frames" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformRelationshipBakeFrames()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "S" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_relationship_bake_frames_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+        menuItem
+            -label "Paste Next Frame" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformWorldSpaceNextFrame()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_world_space_next_frame_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem5;
+
+        menuItem
+            -label "Copy Playback Range" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_copyXformRelationshipPlaybackRange()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "W" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/copy_xform_relationship_playback_range_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem6;
+
+        menuItem
+            -label "Paste All Keys" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.xformTools_pasteXformRelationshipAllKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "E" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/paste_xform_relationship_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem7;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Align" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+        menuItem
+            -label "Align Objects" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjects()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "N" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Location" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsPosition()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_position_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Rotation" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsOrientation()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "E" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_orientation_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Scale" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsScale()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_scale_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+        menuItem
+            -label "Scale (All Keys)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsScaleAllKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_scale_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem5;
+
+        menuItem
+            -label "Rotation (All Keys)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsOrientationAllKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "W" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_orientation_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem6;
+
+        menuItem
+            -label "Location (All Keys)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsPositionAllKeys()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_position_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem7;
+
+        menuItem
+            -label "Align (All Keys)" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.alignObjects_alignObjectsAllKeys();" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "S" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/pink/align_objects_all_keys_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem8;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Objects" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+        menuItem
+            -label "Copy" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "CopySelected;" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "BP_copyFrame.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Paste" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "cutCopyPaste \"paste\";" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "BP_pasteFrame.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Duplicate" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "Duplicate;" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+setParent -m ..;
+

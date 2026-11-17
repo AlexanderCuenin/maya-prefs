@@ -1,0 +1,177 @@
+
+    menuItem
+        -label "Reset Translate" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Translate\nSets translate X/Y/Z of the selected objects back to their defaults (0).\nLocked channels and channels driven by constraints or expressions are skipped.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetTranslate\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nCHANNELS = [\"tx\", \"ty\", \"tz\"]\n\nnodes = cmds.ls(selection=True, transforms=True) or []\nif not nodes:\n    cmds.warning(\"Select the controls to reset.\")\nelse:\n    n = _reset([\"%s.%s\" % (node, a) for node in nodes for a in CHANNELS])\n    print(\"Reset Translate: reset %d channel(s) on %d object(s).\" % (n, len(nodes)))" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+    menuItem
+        -label "Reset Rotate" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Rotate\nSets rotate X/Y/Z of the selected objects back to their defaults (0).\nLocked channels and channels driven by constraints or expressions are skipped.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetRotate\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nCHANNELS = [\"rx\", \"ry\", \"rz\"]\n\nnodes = cmds.ls(selection=True, transforms=True) or []\nif not nodes:\n    cmds.warning(\"Select the controls to reset.\")\nelse:\n    n = _reset([\"%s.%s\" % (node, a) for node in nodes for a in CHANNELS])\n    print(\"Reset Rotate: reset %d channel(s) on %d object(s).\" % (n, len(nodes)))" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+    menuItem
+        -label "Reset Scale" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Scale\nSets scale X/Y/Z of the selected objects back to their defaults (1).\nLocked channels and channels driven by constraints or expressions are skipped.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetScale\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nCHANNELS = [\"sx\", \"sy\", \"sz\"]\n\nnodes = cmds.ls(selection=True, transforms=True) or []\nif not nodes:\n    cmds.warning(\"Select the controls to reset.\")\nelse:\n    n = _reset([\"%s.%s\" % (node, a) for node in nodes for a in CHANNELS])\n    print(\"Reset Scale: reset %d channel(s) on %d object(s).\" % (n, len(nodes)))" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+    menuItem
+        -label "Reset All Xforms" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset All Xforms\nResets translate, rotate and scale of the selected objects to their defaults.\nLocked channels and channels driven by constraints or expressions are skipped.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetTRS\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nCHANNELS = [\"tx\", \"ty\", \"tz\", \"rx\", \"ry\", \"rz\", \"sx\", \"sy\", \"sz\"]\n\nnodes = cmds.ls(selection=True, transforms=True) or []\nif not nodes:\n    cmds.warning(\"Select the controls to reset.\")\nelse:\n    n = _reset([\"%s.%s\" % (node, a) for node in nodes for a in CHANNELS])\n    print(\"Reset All Xforms: reset %d channel(s) on %d object(s).\" % (n, len(nodes)))" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+    menuItem
+        -label "Reset Selected Channels" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Selected Channels\nResets whatever channels are highlighted in the Channel Box to their default\nvalues, on every selected object. Works for any attribute, custom ones on\nrig controls included (an IK/FK switch goes back to its default, a \"space\"\nenum back to its first value, etc.), and for shape / history / output\nchannels highlighted in the lower sections of the Channel Box.\nNothing highlighted? Every keyable channel of the selection is reset instead,\nsame as Reset Pose.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetSelectedChannels\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nCB = \"mainChannelBox\"\nSECTIONS = [  # (highlighted attributes flag, objects shown in that section flag)\n    (\"selectedMainAttributes\", \"mainObjectList\"),\n    (\"selectedShapeAttributes\", \"shapeObjectList\"),\n    (\"selectedHistoryAttributes\", \"historyObjectList\"),\n    (\"selectedOutputAttributes\", \"outputObjectList\"),\n]\n\nplugs = []\nfor attrs_flag, objs_flag in SECTIONS:\n    attrs = cmds.channelBox(CB, q=True, **{attrs_flag: True}) or []\n    objs = cmds.channelBox(CB, q=True, **{objs_flag: True}) or []\n    plugs += [\"%s.%s\" % (o, a) for o in objs for a in attrs if cmds.attributeQuery(a, node=o, exists=True)]\n\nif plugs:\n    n = _reset(plugs)\n    print(\"Reset Selected Channels: reset %d channel(s).\" % n)\nelse:\n    nodes = cmds.ls(selection=True) or []\n    if not nodes:\n        cmds.warning(\"Select objects, and optionally highlight channels in the Channel Box.\")\n    else:\n        plugs = [\"%s.%s\" % (o, a) for o in nodes for a in (cmds.listAttr(o, keyable=True, unlocked=True) or [])]\n        n = _reset(plugs)\n        print(\"Reset Selected Channels: nothing highlighted, reset all %d keyable channel(s).\" % n)" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+    menuItem
+        -label "Clear Channel Box Selection" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nClear Channel Box Selection\nUn-highlights all channels in the Channel Box (the selection itself stays).\n\"\"\"\nimport maya.cmds as cmds\n\ncmds.channelBox(\"mainChannelBox\", edit=True, select=\"\")" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+    menuItem
+        -label "Reset Pose" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Pose\nResets every keyable channel of the selected objects to its default value:\ntranslate, rotate, scale, and custom attributes on rig controls.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _settable(plug):\n    \"\"\"Skip locked channels and channels driven by something other than keys.\"\"\"\n    try:\n        if cmds.getAttr(plug, lock=True):\n            return False\n    except Exception:\n        return False\n    src = cmds.listConnections(plug, source=True, destination=False, skipConversionNodes=True) or []\n    return all(cmds.nodeType(s).startswith(\"animCurve\") for s in src)\n\n\ndef _reset(plugs):\n    \"\"\"Set each node.attr to its default value. Returns how many changed.\"\"\"\n    done = 0\n    cmds.undoInfo(openChunk=True, chunkName=\"resetPose\")\n    try:\n        for plug in plugs:\n            node, attr = plug.split(\".\", 1)\n            try:\n                default = cmds.attributeQuery(attr, node=node, listDefault=True)\n            except Exception:\n                continue\n            if not default or not _settable(plug):\n                continue\n            try:\n                cmds.setAttr(plug, default[0])\n                done += 1\n            except Exception:\n                pass  # string, matrix or other non-numeric channel\n    finally:\n        cmds.undoInfo(closeChunk=True)\n    return done\n\n\nnodes = cmds.ls(selection=True) or []\nif not nodes:\n    cmds.warning(\"Select the controls to reset.\")\nelse:\n    plugs = [\"%s.%s\" % (o, a) for o in nodes for a in (cmds.listAttr(o, keyable=True, unlocked=True) or [])]\n    n = _reset(plugs)\n    print(\"Reset Pose: reset %d channel(s) on %d object(s).\" % (n, len(nodes)))" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+    menuItem
+        -label "Reset Pivot" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nReset Pivot\nPuts the move/rotate manipulator pivot back where it belongs after you moved\nit with D / Insert or a custom pivot. This is Maya's own pivot, the\nnon-animBot stand-in for animBot's Reset Temp Pivot.\n\"\"\"\nimport maya.cmds as cmds\n\ntry:\n    cmds.manipPivot(reset=True)\nexcept Exception:\n    import maya.mel as mel\n    mel.eval(\"manipPivot -r\")" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+setParent -m ..;
+

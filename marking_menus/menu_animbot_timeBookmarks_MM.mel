@@ -1,0 +1,328 @@
+
+    menuItem
+        -label "New Time Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_timeBookmarks()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "N" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/time_bookmarks_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem1;
+
+    menuItem
+        -label "Bookmarks Panel" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_timeBookmarksPanel()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "W" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/time_bookmarks_panel_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem6;
+
+    menuItem
+        -label "Edit Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_editTimeBookmark()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/edit_time_bookmark_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem7;
+
+    menuItem
+        -label "Previous Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_goToPreviousTimeBookmark()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/go_to_previous_time_bookmark_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem8;
+
+    menuItem
+        -label "Next Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_goToNextTimeBookmark()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "SE" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/go_to_next_time_bookmark_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem9;
+
+    menuItem
+        -label "Current Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_goToTimeBookmark()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "S" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/go_to_time_bookmark_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem10;
+
+    menuItem
+        -label "Import/Export" 
+        -divider 0
+        -subMenu 1
+        -tearOff 0
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "E" 
+        -allowOptionBoxes 1
+        -enableCommandRepeat 1
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem4;
+
+        menuItem
+            -label "Quick Import" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_quickImportTimeBookmarks()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/quick_import_time_bookmarks_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem1;
+
+        menuItem
+            -label "Quick Export" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_quickExportTimeBookmarks()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "SE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/quick_export_time_bookmarks_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem2;
+
+        menuItem
+            -label "Import Bookmarks" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_importTimeBookmarks()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NW" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/import_time_bookmarks_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem3;
+
+        menuItem
+            -label "Export Bookmarks" 
+            -divider 0
+            -subMenu 0
+            -tearOff 0
+            -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_exportTimeBookmarks()\");" 
+            -optionBox 0
+            -enable 1
+            -visible 1
+            -data 0
+            -radialPosition "NE" 
+            -allowOptionBoxes 1
+            -postMenuCommandOnce 0
+            -enableCommandRepeat 1
+            -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/export_time_bookmarks_shelf.png" 
+            -echoCommand 0
+            -italicized 0
+            -boldFont 1
+            -sourceType "mel" 
+            -longDivider 1
+            menuEditorMenuItem4;
+
+    setParent -m ..;
+
+    menuItem
+        -label "Toggle Affected by Nudge" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_timeBookmarksAffectedByNudgeTools()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/time_bookmarks_affected_by_nudge_tools_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem3;
+
+    menuItem
+        -label "Toggle Visibility" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_timeBookmarksVisibility()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/time_bookmarks_visibility_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem2;
+
+    menuItem
+        -label "Clear All Bookmarks" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_clearAllTimeBookmarks()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/clear_all_time_bookmarks_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem5;
+
+    menuItem
+        -label "Delete Bookmark" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "python(\"from animBot._api.core import CORE as ANIMBOT_CORE; ANIMBOT_CORE.trigger.timeBookmarks_removeTimeBookmark()\");" 
+        -optionBox 0
+        -enable 1
+        -visible 1
+        -data 0
+        -radialPosition "NW" 
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -image "/Users/alexandercuenin/Library/Preferences/Autodesk/maya/scripts/animBot/_resources/img/icons_shelf/red/remove_time_bookmark_shelf.png" 
+        -echoCommand 0
+        -italicized 0
+        -boldFont 0
+        -sourceType "mel" 
+        -longDivider 1
+        menuEditorMenuItem11;
+
+setParent -m ..;
+
