@@ -291,7 +291,13 @@ try:
     open(os.path.join(b.prefs, "markingMenus", "menu_curveTangents_MM.mel"), "w").write("// old")
     assert not any("curveTangents" in c for c in ms.push(dry_run=True))
 
-    # 10. No token -> push refuses politely
+    # 10. A repo menu with a built-in's name is installed and never dropped by push
+    gh.edit({"marking_menus/menu_ChangePanelLayout.mel": b"// alex's own version"})
+    ms.sync()
+    assert open(os.path.join(b.prefs, "markingMenus", "menu_ChangePanelLayout.mel")).read() == "// alex's own version"
+    assert ms.push(dry_run=True) == []
+
+    # 11. No token -> push refuses politely
     gh.online = True
     ms._token = lambda: ""
     assert ms.push() == []

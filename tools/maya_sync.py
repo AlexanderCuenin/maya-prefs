@@ -903,6 +903,9 @@ def capture(folder=None, extra_patterns=None, include_default_menus=False, quiet
         pass
 
     defaults = set() if include_default_menus else _default_marking_menus()
+    # A menu that shares a built-in's name (your own CommonModelingPanes, say)
+    # is still yours once it's in the repo, so keep capturing it.
+    defaults -= set(n.lower() for n in _list_files(os.path.join(repo_cache(), "marking_menus"), ["*.mel"]))
     retired = load_config().get("retired", {})
     for cat, repo_sub, local_dir_fn, patterns in FILE_CATEGORIES:
         src = local_dir_fn()
