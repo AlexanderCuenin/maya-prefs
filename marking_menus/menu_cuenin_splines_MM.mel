@@ -239,6 +239,27 @@
         menuEditorMenuItem11;
 
     menuItem
+        -label "Splice Keys" 
+        -divider 0
+        -subMenu 0
+        -tearOff 0
+        -command "\"\"\"\nSplice Keys\nAdds a key at the current frame on the curves you're working on, without\nchanging the curve's shape. Like holding I in the Graph Editor, but in one go\nat the time slider's position.\n\nWhich curves get a key:\n  1. curves that have selected keys in the Graph Editor, or else\n  2. curves highlighted in the Graph Editor's channel list, or else\n  3. every animated channel on the selected objects.\nCurves that already have a key on this frame are left alone.\nThe new keys end up selected, and one Ctrl+Z undoes the whole thing.\n\"\"\"\nimport maya.cmds as cmds\n\n\ndef _target_curves():\n    curves = cmds.keyframe(q=True, selected=True, name=True) or []\n    if curves:\n        return curves, \"curves with selected keys\"\n    for ge in (\"graphEditor1FromOutliner\",):\n        if cmds.selectionConnection(ge, exists=True):\n            channels = cmds.selectionConnection(ge, q=True, object=True) or []\n            curves = (cmds.keyframe(channels, q=True, name=True) or []) if channels else []\n            if curves:\n                return curves, \"highlighted Graph Editor channels\"\n    sel = cmds.ls(selection=True) or []\n    curves = (cmds.keyframe(sel, q=True, name=True) or []) if sel else []\n    return curves, \"animated channels on the selection\"\n\n\ndef splice_keys():\n    t = cmds.currentTime(q=True)\n    curves, source = _target_curves()\n    curves = sorted(set(curves))\n    if not curves:\n        cmds.warning(\"Splice Keys: select keys, curves or animated objects first.\")\n        return\n\n    added, skipped = [], 0\n    cmds.undoInfo(openChunk=True, chunkName=\"spliceKeys\")\n    try:\n        for crv in curves:\n            if cmds.keyframe(crv, q=True, time=(t, t), keyframeCount=True):\n                skipped += 1\n                continue\n            try:\n                cmds.setKeyframe(crv, insert=True, time=(t, t))\n            except Exception:\n                # fall back to keying the channel the curve drives\n                plugs = cmds.listConnections(crv + \".output\", plugs=True,\n                                             source=False, destination=True) or []\n                if not plugs:\n                    continue\n                cmds.setKeyframe(plugs[0], insert=True, time=(t, t))\n            added.append(crv)\n        if added:\n            cmds.selectKey(clear=True)\n            for crv in added:\n                cmds.selectKey(crv, add=True, keyframe=True, time=(t, t))\n    finally:\n        cmds.undoInfo(closeChunk=True)\n\n    print(\"Splice Keys: added %d key(s) at frame %g on %s (%d already had a key).\"\n          % (len(added), t, source, skipped))\n\n\nsplice_keys()" 
+        -optionBox 0
+        -header 0
+        -enable 1
+        -visible 1
+        -data 0
+        -allowOptionBoxes 1
+        -postMenuCommandOnce 0
+        -enableCommandRepeat 1
+        -echoCommand 0
+        -italicized 0
+        -boldFont 1
+        -sourceType "python" 
+        -longDivider 1
+        menuEditorMenuItem12;
+
+    menuItem
         -label "separator" 
         -divider 1
         -dividerLabel "separator" 
@@ -256,7 +277,7 @@
         -boldFont 0
         -sourceType "mel" 
         -longDivider 1
-        menuEditorMenuItem12;
+        menuEditorMenuItem13;
 
     menuItem
         -label "Euler" 
@@ -277,7 +298,7 @@
         -boldFont 0
         -sourceType "python" 
         -longDivider 1
-        menuEditorMenuItem13;
+        menuEditorMenuItem14;
 
     menuItem
         -label "separator" 
@@ -297,7 +318,7 @@
         -boldFont 0
         -sourceType "mel" 
         -longDivider 1
-        menuEditorMenuItem14;
+        menuEditorMenuItem15;
 
     menuItem
         -label "Kill Static Curves" 
@@ -318,7 +339,7 @@
         -boldFont 0
         -sourceType "python" 
         -longDivider 1
-        menuEditorMenuItem15;
+        menuEditorMenuItem16;
 
     menuItem
         -label "Kill Redundant Keys" 
@@ -339,7 +360,7 @@
         -boldFont 0
         -sourceType "python" 
         -longDivider 1
-        menuEditorMenuItem16;
+        menuEditorMenuItem17;
 
 setParent -m ..;
 

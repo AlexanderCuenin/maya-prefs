@@ -60,6 +60,11 @@
       "script": "list_flat_global.py"
     },
     {
+      "label": "Splice Keys",
+      "bold": true,
+      "script": "list_splice_keys.py"
+    },
+    {
       "label": "separator",
       "divider": true
     },
