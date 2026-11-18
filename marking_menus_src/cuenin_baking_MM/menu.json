@@ -14,7 +14,7 @@
       "script": "bake2s.py"
     },
     {
-      "label": "Bake on Threes",
+      "label": "Bake Threes",
       "position": "E",
       "bold": true,
       "script": "bake3s.py"

@@ -1,5 +1,5 @@
 """
-Bake on Threes
+Bake Threes
 Bakes the curves of your selected keys so there is a key every 3 frame(s).
 Range: first to last selected key. If no keys are selected, the selected
 objects' curves are baked over the playback range.
