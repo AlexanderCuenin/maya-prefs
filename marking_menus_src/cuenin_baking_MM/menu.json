@@ -5,25 +5,25 @@
       "label": "Bake Ones",
       "position": "N",
       "bold": true,
-      "script": "bake_ones.py"
+      "script": "bake1s.py"
     },
     {
       "label": "Bake Twos",
       "position": "NE",
       "bold": true,
-      "script": "bake_twos.py"
+      "script": "bake2s.py"
     },
     {
       "label": "Bake on Threes",
       "position": "E",
       "bold": true,
-      "script": "bake_on_threes.py"
+      "script": "bake3s.py"
     },
     {
       "label": "Bake Fours",
       "position": "SE",
       "bold": true,
-      "script": "bake_fours.py"
+      "script": "bake4s.py"
     },
     {
       "label": "Bake Custom Interval",
