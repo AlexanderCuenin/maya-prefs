@@ -42,12 +42,16 @@ def _flop_curve(crv, times):
 
     # Park the selected keys past the end of the curve, then drop each one on
     # its mirrored frame, so no key ever lands on another while moving.
+    # option="over" lets a key travel past its neighbours; Maya's default
+    # move refuses that ("Cannot move keys").
     last = max(cmds.keyframe(crv, q=True, timeChange=True))
     park = last - start + 1000.0
     for t in sorted(times, reverse=True):
-        cmds.keyframe(crv, e=True, time=(t, t), timeChange=t + park, absolute=True)
+        cmds.keyframe(crv, e=True, time=(t, t), timeChange=t + park,
+                      absolute=True, option="over")
     for t in sorted(times, key=lambda x: target[x]):
-        cmds.keyframe(crv, e=True, time=(t + park, t + park), timeChange=target[t], absolute=True)
+        cmds.keyframe(crv, e=True, time=(t + park, t + park), timeChange=target[t],
+                      absolute=True, option="over")
 
     # Mirror the tangents: what came in now goes out, and slopes flip sign.
     for t in times:
