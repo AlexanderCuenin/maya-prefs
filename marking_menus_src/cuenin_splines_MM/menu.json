@@ -68,6 +68,10 @@
       "script": "splice_keys.py"
     },
     {
+      "label": "Flop Keys",
+      "script": "flop_keys.py"
+    },
+    {
       "label": "separator",
       "divider": true
     },
