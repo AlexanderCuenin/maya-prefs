@@ -1,0 +1,3 @@
+// Clear Channel Box Selection
+// Un-highlights all channels in the Channel Box (the selection itself stays).
+channelBox -edit -select "" mainChannelBox;

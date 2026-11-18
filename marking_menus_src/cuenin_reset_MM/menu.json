@@ -35,7 +35,7 @@
       "label": "Clear Channel Box Selection",
       "position": "NW",
       "bold": true,
-      "script": "clear_channel_box_selection.py"
+      "script": "clear_channel_box_selection.mel"
     },
     {
       "label": "Reset Pose",
@@ -45,7 +45,7 @@
     {
       "label": "Reset Pivot",
       "bold": true,
-      "script": "reset_pivot.py"
+      "script": "reset_pivot.mel"
     }
   ]
 }

@@ -1,0 +1,22 @@
+// Buffer Snap
+// Graph Editor: snapshots the current shape of the selected curves into Maya's
+// buffer curve, so you can edit and compare against the original.
+// Also turns on "Show Buffer Curves" in the Graph Editor.
+//
+// Works on selected keys if there are any, otherwise on selected objects.
+//
+// $mode = "store"  -> save a new buffer (default)
+// $mode = "swap"   -> swap the curve with its buffer (flip back to the old version)
+{
+    string $mode = "store";
+    if (`keyframe -q -selected -keyframeCount` == 0 && size(`ls -selection`) == 0) {
+        warning "Select some keys or objects first.";
+    } else {
+        if ($mode == "swap")
+            bufferCurve -animation "keysOrObjects" -swap;
+        else
+            bufferCurve -animation "keysOrObjects" -overwrite true;
+        // make the buffer visible (editor name can differ, so don't die on it)
+        catchQuiet(`animCurveEditor -edit -showBufferCurves "on" graphEditor1GraphEd`);
+    }
+}

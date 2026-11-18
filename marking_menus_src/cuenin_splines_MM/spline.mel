@@ -1,0 +1,8 @@
+// Auto Tangent
+// Graph Editor: sets the in and out tangents of the selected keys to Auto.
+{
+    if (`keyframe -q -selected -keyframeCount` == 0)
+        warning "Select some keys in the Graph Editor first.";
+    else
+        keyTangent -edit -inTangentType auto -outTangentType auto;
+}

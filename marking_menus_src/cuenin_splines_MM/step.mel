@@ -1,0 +1,9 @@
+// Step Tangent
+// Graph Editor: sets the OUT tangent of the selected keys to Step.
+// In tangents are left alone, since Maya only steps on the out side.
+{
+    if (`keyframe -q -selected -keyframeCount` == 0)
+        warning "Select some keys in the Graph Editor first.";
+    else
+        keyTangent -edit -outTangentType step;
+}

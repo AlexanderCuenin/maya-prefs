@@ -1,0 +1,7 @@
+// Set Flat Global
+// Sets the default tangent type for NEW keys to Flat (in and out).
+// Does not touch existing keys.
+{
+    keyTangent -global -inTangentType flat -outTangentType flat;
+    inViewMessage -amg "Default tangents: <hl>Flat</hl>" -pos midCenter -fade;
+}

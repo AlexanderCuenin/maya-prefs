@@ -23,41 +23,41 @@
       "label": "Spline",
       "position": "NW",
       "bold": true,
-      "script": "spline.py"
+      "script": "spline.mel"
     },
     {
       "label": "Step",
       "position": "N",
       "bold": true,
-      "script": "step.py"
+      "script": "step.mel"
     },
     {
       "label": "Flat",
       "position": "NE",
       "bold": true,
-      "script": "flat.py"
+      "script": "flat.mel"
     },
     {
       "label": "Buffer Snap",
       "position": "E",
-      "script": "buffer_snap.py"
+      "script": "buffer_snap.mel"
     },
     {
       "label": "Linear",
       "position": "W",
-      "script": "linear.py"
+      "script": "linear.mel"
     },
     {
       "label": "Spline Global",
-      "script": "spline_global.py"
+      "script": "spline_global.mel"
     },
     {
       "label": "Step Global",
-      "script": "step_global.py"
+      "script": "step_global.mel"
     },
     {
       "label": "Flat Global",
-      "script": "flat_global.py"
+      "script": "flat_global.mel"
     },
     {
       "label": "separator",

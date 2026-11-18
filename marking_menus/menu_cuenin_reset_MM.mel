@@ -114,7 +114,7 @@
         -divider 0
         -subMenu 0
         -tearOff 0
-        -command "\"\"\"\nClear Channel Box Selection\nUn-highlights all channels in the Channel Box (the selection itself stays).\n\"\"\"\nimport maya.cmds as cmds\n\ncmds.channelBox(\"mainChannelBox\", edit=True, select=\"\")" 
+        -command "// Clear Channel Box Selection\n// Un-highlights all channels in the Channel Box (the selection itself stays).\nchannelBox -edit -select \"\" mainChannelBox;" 
         -optionBox 0
         -header 0
         -enable 1
@@ -127,7 +127,7 @@
         -echoCommand 0
         -italicized 0
         -boldFont 1
-        -sourceType "python" 
+        -sourceType "mel" 
         -longDivider 1
         menuEditorMenuItem6;
 
@@ -157,7 +157,7 @@
         -divider 0
         -subMenu 0
         -tearOff 0
-        -command "\"\"\"\nReset Pivot\nPuts the move/rotate manipulator pivot back where it belongs after you moved\nit with D / Insert or a custom pivot. This is Maya's own pivot, the\nnon-animBot stand-in for animBot's Reset Temp Pivot.\n\"\"\"\nimport maya.cmds as cmds\n\ntry:\n    cmds.manipPivot(reset=True)\nexcept Exception:\n    import maya.mel as mel\n    mel.eval(\"manipPivot -r\")" 
+        -command "// Reset Pivot\n// Puts the move/rotate manipulator pivot back where it belongs after you moved\n// it with D / Insert or a custom pivot. This is Maya's own pivot, the\n// non-animBot stand-in for animBot's Reset Temp Pivot.\nmanipPivot -reset;" 
         -optionBox 0
         -header 0
         -enable 1
@@ -169,7 +169,7 @@
         -echoCommand 0
         -italicized 0
         -boldFont 1
-        -sourceType "python" 
+        -sourceType "mel" 
         -longDivider 1
         menuEditorMenuItem8;
 
