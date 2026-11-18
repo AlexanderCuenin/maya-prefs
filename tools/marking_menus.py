@@ -225,7 +225,7 @@ def extract(mel_path, out_root=SRC):
             entry["icon"] = f["image"]
         if not f.get("divider") and f.get("command", "") != "":
             ext = ".py" if f.get("sourceType") == "python" else ".mel"
-            base = (entry.get("position", "list").lower() + "_" + _slug(entry["label"]))
+            base = _slug(entry["label"])  # positions live only in menu.json
             script, n = base + ext, 2
             while script in used:
                 script, n = "%s_%d%s" % (base, n, ext), n + 1
